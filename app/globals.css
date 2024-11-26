@@ -1,0 +1,40 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+@layer base {
+  :root {
+    /* Base colors */
+    --background: #f8fafc;
+    --foreground: #1e293b;
+
+    /* Dashboard theme colors */
+    --primary-color: #1e2b3b;     /* Dark blue for sidebar */
+    --secondary-color: #3b82f6;    /* Blue for buttons and highlights */
+    --text-color: #64748b;         /* Slate for regular text */
+    --card-bg: #ffffff;            /* White for cards */
+    --hover-color: #2563eb;        /* Darker blue for hover states */
+    --success-color: #22c55e;      /* Green for success states */
+    --warning-color: #f59e0b;      /* Amber for warnings */
+    --danger-color: #ef4444;       /* Red for danger/error states */
+
+    /* Layout measurements */
+    --sidebar-width: 16rem;        /* 256px */
+    --header-height: 4rem;         /* 64px */
+  }
+
+  /* Dark mode overrides if needed */
+  [data-theme='dark'] {
+    --background: #0f172a;
+    --foreground: #f8fafc;
+    --primary-color: #1e1e1e;
+    --card-bg: #1e293b;
+    --text-color: #e2e8f0;
+  }
+}
+  }
+}
+
