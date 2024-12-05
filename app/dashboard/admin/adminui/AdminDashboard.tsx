@@ -40,15 +40,6 @@ export interface Answer {
   price: number;
   createdAt: string;
 }
-
-interface SidebarProps {
-  isOpen: boolean;
-  onClose: () => void;
-  isCollapsed: boolean;
-  onCollapse: () => void;
-  onLogout: () => Promise<void>;  // Add proper type
-}
-
 export interface DashboardStats {
   totalRevenue: number;
   totalOrders: number;
@@ -63,8 +54,8 @@ export interface DashboardStats {
   pendingAnswers: number;
   totalQARevenue: number;
   qaGrowth: number;
-  questions: Question[];  // Add this
-  answers: Answer[];     // Add this
+  questions: Question[];  
+  answers: Answer[];     
 }
 export interface Order {
   id: string;
@@ -117,10 +108,6 @@ export interface ErrorBoundaryProps {
 
 export interface ErrorBoundaryState {
   hasError: boolean;
-}
-export interface DashboardHeaderProps {
-  onToggleSidebar: () => void;
-  onLogout: () => Promise<void>;
 }
 
 // Sidebar Types
@@ -1476,7 +1463,16 @@ export const AdminDashboard: React.FC = () => {
         setLoading(true);
         setError(null);
         
-        const data = mockDashboardData;
+        const data = mockDashboardData as {
+          stats: DashboardStats;
+          orders: Order[];
+          users: User[];
+          logs: ActivityLog[];
+          settings: SystemSettings;
+          analyticsData: any[];
+          questions: Question[];
+          answers: Answer[];
+        };
         
         if (!mounted) return;
 
@@ -1490,8 +1486,8 @@ export const AdminDashboard: React.FC = () => {
         setLogs(data.logs);
         setSettings(data.settings);
         setAnalyticsData(data.analyticsData);
-        setQuestions(data.questions || []);
-        setAnswers(data.answers || []);
+        setQuestions(data.stats.questions); 
+        setAnswers(data.stats.answers); 
         
       } catch (error) {
         if (mounted) {

@@ -64,7 +64,7 @@ const adminSystemSchema = new mongoose.Schema({
         version: { type: String, default: '1.0.0' },
         lastUpdate: { type: Date, default: Date.now }
     },
-    errors: [{
+    systemErrors: [{
         timestamp: { type: Date, default: Date.now },
         level: { 
             type: String, 

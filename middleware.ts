@@ -7,41 +7,51 @@ export async function middleware(req: NextRequest) {
   const res = NextResponse.next();
   const supabase = createMiddlewareClient({ req, res });
 
-  const {
-    data: { session },
-  } = await supabase.auth.getSession();
+  try {
+    // Check auth session
+    const { data: { session }, error: sessionError } = await supabase.auth.getSession();
 
-  if (!session) {
-    return NextResponse.redirect(new URL('/sign-in', req.url));
-  }
+    if (sessionError || !session) {
+      console.error('Session error:', sessionError);
+      return NextResponse.redirect(new URL('/login', req.url));
+    }
 
-  // Get user role
-  const { data: userData } = await supabase
-    .from('users')
-    .select('role')
-    .eq('id', session.user.id)
-    .single();
+    // Get user role from user_roles table
+    const { data: userRole, error: roleError } = await supabase
+      .from('user_roles')
+      .select('role')
+      .eq('user_id', session.user.id)
+      .single();
 
-  const path = req.nextUrl.pathname;
-  const role = userData?.role;
+    if (roleError || !userRole) {
+      console.error('Role error:', roleError);
+      return NextResponse.redirect(new URL('/', req.url));
+    }
 
-  // Protect routes based on role
-  if (path.startsWith('/dashboard/admin') && role !== 'admin') {
-    return NextResponse.redirect(new URL('/dashboard', req.url));
-  }
-  if (path.startsWith('/dashboard/editor') && role !== 'editor') {
-    return NextResponse.redirect(new URL('/dashboard', req.url));
-  }
-  if (path.startsWith('/dashboard/writer') && role !== 'writer') {
-    return NextResponse.redirect(new URL('/dashboard', req.url));
-  }
-  if (path.startsWith('/dashboard/employer') && role !== 'employer') {
-    return NextResponse.redirect(new URL('/dashboard', req.url));
-  }
+    const path = req.nextUrl.pathname;
+    const role = userRole.role;
 
-  return res;
+    // Check if the requested path matches the user's role
+    if (path.startsWith('/dashboard/')) {
+      const requestedRole = path.split('/')[2]; // Get role from URL
+      
+      if (requestedRole !== role) {
+        // Redirect to their correct dashboard
+        return NextResponse.redirect(new URL(`/dashboard/${role}`, req.url));
+      }
+    }
+
+    return res;
+
+  } catch (error) {
+    console.error('Middleware error:', error);
+    return NextResponse.redirect(new URL('/login', req.url));
+  }
 }
 
 export const config = {
-  matcher: '/dashboard/:path*',
+  matcher: [
+    '/dashboard/:path*',
+    '/((?!api|_next/static|_next/image|favicon.ico).*)',
+  ]
 };

@@ -5,16 +5,8 @@ import React, { useState, Fragment, useRef, useEffect } from 'react';
 import { Menu, Transition, Tab, Popover, Dialog } from '@headlessui/react';
 import Link from 'next/link';
 import Image from 'next/image'; 
-
-
 import { AreaChart, Area, XAxis, YAxis, CartesianGrid, Tooltip,ResponsiveContainer} from 'recharts';
-
-import { 
-  Home, FileText, Wallet2, User, Mail, Settings, 
-  Star, MessageCircle, AlertTriangle, Ban, Menu as MenuIcon, 
-  Bell, LogOut, ChevronDown, Send, X, Clock, CheckCircle, Upload, CreditCard, Lock,
-  DollarSign, Edit, Shield, Search, ArrowRight, PenTool, FileCheck,
-  ThumbsUp, ThumbsDown, Download, Eye, Check, Loader2 } from 'lucide-react';
+import { Home, FileText, Wallet2, User, Mail, Settings, Star, MessageCircle, AlertTriangle, Ban, Menu as MenuIcon, Bell, LogOut, ChevronDown, Send, X, Clock, CheckCircle, Upload, CreditCard, Lock, DollarSign, Edit, Shield, Search, ArrowRight, PenTool, FileCheck, ThumbsUp, ThumbsDown, Download, Eye, Check, Loader2 } from 'lucide-react';
 
 // Interfaces
 interface Paper {
@@ -59,13 +51,6 @@ interface Notification {
   timestamp: Date;
   read: boolean;
   type: 'paper' | 'system' | 'payment';
-}
-
-interface EditorStats {
-  papersReviewed: number;
-  totalEarnings: number;
-  averageRating: number;
-  rejectionRate: number;
 }
 interface SidebarNestedItem {
   label: string;
@@ -224,8 +209,6 @@ export default function EditorDashboard() {
   // Core state management
   const [isClient, setIsClient] = useState(false);
   const [isSidebarOpen, setSidebarOpen] = useState(true);
-  const [isChatOpen, setChatOpen] = useState(false);
-  const [message, setMessage] = useState('');
   const [notifications, setNotifications] = useState<Notification[]>([]);
   const [papers, setPapers] = useState<Paper[]>([]);
   const [currentPaper, setCurrentPaper] = useState<Paper | null>(null);
@@ -235,7 +218,6 @@ export default function EditorDashboard() {
   const [toastType, setToastType] = useState<'success' | 'error' | 'info'>('info');
   const [expandedItem, setExpandedItem] = useState<string | null>(null);
   const [showWithdrawModal, setShowWithdrawModal] = useState(false);
-  const [filterStatus, setFilterStatus] = useState<Paper['status'] | 'all'>('pending_review');
 
   const showToastMessage = (message: string, type: 'success' | 'error' | 'info') => {
     setToastMessage(message);
@@ -249,7 +231,7 @@ export default function EditorDashboard() {
   };
 
   // Initialize on client-side
-  
+  showToastMessage('Operation completed successfully!', 'success');
 
   const loadMockData = () => {
     // Mock papers data

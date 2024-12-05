@@ -333,7 +333,7 @@ export default function EmployerDashboard() {
     const messagesEndRef = useRef<null | HTMLDivElement>(null);
     const [showMoneyBackModal, setShowMoneyBackModal] = useState(false);
     const [showDeleteOrderModal, setShowDeleteOrderModal] = useState(false);
-    const fileInputRef = useRef<HTMLInputElement>(null);
+   
   
     // Order management state
     const [orders, setOrders] = useState<Order[]>([]);
@@ -534,6 +534,7 @@ export default function EmployerDashboard() {
         setOrderFiles(prev => [...prev, ...newFiles]);
       }
     };
+    
     // Writer management handlers
     const toggleWriterPrivate = (writerId: string) => {
       const writer = publicWriters.find(w => w.id === writerId);
@@ -2173,10 +2174,10 @@ const SupportSection = () => {
               </div>
               <h3 className="font-medium text-slate-900 mb-2">Creating Orders</h3>
               <p className="text-sm text-slate-600 mb-4">
-                Learn how to create effective orders and get the best responses from writers.
+                Click on "orders" then click on "Create Order" to proceed seamlessly.
               </p>
               <button className="text-sm text-blue-600 hover:text-blue-700 font-medium">
-                Read Guide →
+                The Guide →
               </button>
             </div>
   
@@ -2187,7 +2188,7 @@ const SupportSection = () => {
               </div>
               <h3 className="font-medium text-slate-900 mb-2">Managing Writers</h3>
               <p className="text-sm text-slate-600 mb-4">
-                Tips for working with writers and building a reliable team.
+                Work with both private and public writers at your disposal.
               </p>
               <button className="text-sm text-green-600 hover:text-green-700 font-medium">
                 Learn More →
@@ -2201,7 +2202,7 @@ const SupportSection = () => {
               </div>
               <h3 className="font-medium text-slate-900 mb-2">Payment & Security</h3>
               <p className="text-sm text-slate-600 mb-4">
-                Understanding our secure payment system and money-back guarantee.
+                Eclipse Writers offers a secure payment system and money-back guarantee.
               </p>
               <button className="text-sm text-yellow-600 hover:text-yellow-700 font-medium">
                 View Details →
