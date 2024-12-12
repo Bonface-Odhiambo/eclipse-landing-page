@@ -92,6 +92,9 @@ importers:
       nodemailer:
         specifier: ^6.9.16
         version: 6.9.16
+      openssl:
+        specifier: ^2.0.0
+        version: 2.0.0
       react:
         specifier: ^18.3.1
         version: 18.3.1
@@ -105,7 +108,7 @@ importers:
         specifier: ^4.1.2
         version: 4.1.2(react@18.3.1)
       recharts:
-        specifier: ^2.13.0
+        specifier: ^2.13.3
         version: 2.13.3(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
       socket.io:
         specifier: ^4.8.1
@@ -3003,6 +3006,10 @@ packages:
 
   openid-client@5.7.0:
     resolution: {integrity: sha512-4GCCGZt1i2kTHpwvaC/sCpTpQqDnBzDzuJcJMbH+y1Q5qI8U8RBvoSh28svarXszZHR5BAMXbJPX1PGPRE3VOA==}
+
+  openssl@2.0.0:
+    resolution: {integrity: sha512-0FgKhQ/e+XCtTTgn3qZO2g3y+Y3FC/LGvt77oObmMR4ZkZvsV1CuG/mMZClZgZqVKr0+tkemP+I3Uub4WXkHYw==}
+    deprecated: Package no longer supported. Contact Support at https://www.npmjs.com/support for more info.
 
   optionator@0.9.4:
     resolution: {integrity: sha512-6IpQ7mKUxRcZNLIObR0hz7lxsapSSIYNZJwXPGeF0mTVqGKFIXj1DQcMoT22S3ROcLyY/rz0PWaWZ9ayWmad9g==}
@@ -7358,6 +7365,8 @@ snapshots:
       lru-cache: 6.0.0
       object-hash: 2.2.0
       oidc-token-hash: 5.0.3
+
+  openssl@2.0.0: {}
 
   optionator@0.9.4:
     dependencies:
